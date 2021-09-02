@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown,
-  Button,
-  Row,
-  Col,
+  Navbar,  Container,  Nav,  NavDropdown,  Button,  Row,  Col,
 } from "react-bootstrap";
 import "./App.css";
 //import {name, name2} from './data.js';
 import Data from "./data.js";
+import {Link,Route,Switch} from 'react-router-dom';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
@@ -42,7 +37,11 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <section className="background">
+   
+
+      <Route exact path="/">
+        {/* <div>메인페이지</div> */}
+        <section className="background">
         <h1>20% Season Off</h1>
         <p>
           This is a simple hero unit, a simple jumbotron-style component for
@@ -52,7 +51,6 @@ function App() {
           <Button variant="primary">Learn more</Button>
         </p>
       </section>
-
       <div className="container">
         <div className="row">
             {/* <Card shoes={shoes[0]} />        
@@ -66,6 +64,26 @@ function App() {
             }     
         </div>
       </div>
+      </Route>
+      <Route path="/detail">
+        {/* <div>디테일페이지</div> */}
+        <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button> 
+        </div>
+      </div>
+</div> 
+      </Route>
+
+    {/* <Route path="/어쩌구" component={Modal}></Route> */}
+     
       <Container>
         <Row>
           <Col>1 of 2</Col>
