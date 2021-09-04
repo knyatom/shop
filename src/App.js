@@ -49,36 +49,35 @@ function App() {
         </Container>
       </Navbar>
       <Switch>
-
-      <Route exact path="/">
-        <section className="background">
-          <h1>20% Season Off</h1>
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="primary">Learn more</Button>
-          </p>
-        </section>
-        <div className="container">
-          <div className="row">
-            {shoes.map((shoe, i) => {
-              return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
-              // return <Card shoes={shoe} />
-            })}
+        <Route exact path="/">
+          <section className="background">
+            <h1>20% Season Off</h1>
+            <p>
+              This is a simple hero unit, a simple jumbotron-style component for
+              calling extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </section>
+          <div className="container">
+            <div className="row">
+              {shoes.map((shoe, i) => {
+                return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
+                // return <Card shoes={shoe} />
+              })}
+            </div>
           </div>
-        </div>
-      </Route>
+        </Route>
 
-      <Route path="/detail">
-        <Detail />
-      </Route>
+        <Route path="/detail/:id" exact>
+          <Detail shoes={shoes} />
+        </Route>
 
-      <Route path="/:id">
-        <div> 아무거나 보여주셈</div>
-      </Route>     
-</Switch>
+        <Route exact path="/:id">
+          <div> 아무거나 보여주셈</div>
+        </Route>
+      </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
 
       <Container>
