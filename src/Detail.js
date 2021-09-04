@@ -7,13 +7,14 @@ function Detail(props) {
   let 찾은상품=props.shoes.find((상품)=>{
     return 상품.id=id
   })
+  let id2=id;
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6">
           <img
-            src="https://codingapple1.github.io/shop/shoes2.jpg"
+            src={`https://codingapple1.github.io/shop/shoes${parseInt(id)+1}.jpg`}
             width="100%"
           />
         </div>

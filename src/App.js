@@ -70,12 +70,12 @@ function App() {
           </div>
         </Route>
 
-        <Route path="/detail/:id" exact>
+        <Route path="/detail/:id" >
           <Detail shoes={shoes} />
         </Route>
 
-        <Route exact path="/:id">
-          <div> 아무거나 보여주셈</div>
+        <Route  path="/:id">
+        <Detail shoes={shoes} />
         </Route>
       </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
