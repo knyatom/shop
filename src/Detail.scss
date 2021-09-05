@@ -1,0 +1,60 @@
+@import './reset.scss';
+
+.red {
+    background-color: pink;
+}
+
+$메인컬러:#ff00ff;
+
+.pink {
+    color: $메인컬러;
+}
+
+// Nesting 
+div.container{
+    h4{
+        color:blue;
+    }
+    p{
+        color:white
+    }
+}
+@mixin  함수() {
+    background:#ccc;
+    padding:20px;
+    border-radius: 5px;
+    margin:auto;
+    color:white;
+    text-align: center;
+}
+.my-alert{
+    // background:#ccc;
+    // padding:20px;
+    // border-radius: 5px;
+    // margin:auto;
+    // color:white;
+    // text-align: center;
+    @include 함수();
+}
+.my-alert p{
+    margin-bottom: 0;
+}
+
+.my-alert2{    
+    // padding:20px;
+    // border-radius: 5px;
+    // margin:auto;
+    
+    @extend .my-alert;
+     background:#333 ;
+     color:white !important;
+}
+
+
+
+.my-alert3{
+    @include 함수();
+}
+
+
+

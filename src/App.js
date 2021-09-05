@@ -13,6 +13,7 @@ import "./App.css";
 import Data from "./data.js";
 import Detail from "./Detail.js";
 import { Link, Route, Switch } from "react-router-dom";
+import './Detail.scss';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
@@ -25,12 +26,9 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="/">Home</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/detail">Detail</Link>
-              </Nav.Link>
+              {/* <Nav.Link><Link to="/">Home</Link></Nav.Link> */}
+              <Nav.Link as={Link} to="/">Home </Nav.Link> 
+              <Nav.Link as={Link} to="/detail/0">Detail </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -74,7 +72,7 @@ function App() {
           <Detail shoes={shoes} />
         </Route>
 
-        <Route  path="/:id">
+        <Route  path="/detail/0">
         <Detail shoes={shoes} />
         </Route>
       </Switch>
