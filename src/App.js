@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown,
-  Button,
-  Row,
-  Col,
+import {  Navbar,  Container,  Nav,  NavDropdown,  Button,  Row,  Col,
 } from "react-bootstrap";
 import "./App.css";
 //import {name, name2} from './data.js';
@@ -14,9 +7,37 @@ import Data from "./data.js";
 import Detail from "./Detail.js";
 import { Link, Route, Switch } from "react-router-dom";
 import './Detail.scss';
+import axios from 'axios';
 
 function App() {
   let [shoes, shoes변경] = useState(Data);
+  let [loading,setLoading]=useState(false);
+
+ const loadJson=()=>{
+    // axios.post('서버URL',{id:'codingapple',pw:1234});
+    axios.get('https://codingapple1.github.io/shop/data2.json')
+    .then((result)=>{
+      // 로딩중안보이게하기                
+        setLoading(false);                
+      
+      shoes변경([...shoes,...result.data]);
+    })
+    .catch(()=>{
+      // 로딩중 보이게 하기
+      setLoading(true);
+      console.log('실패..')
+    });
+    // axios ->json을 object로 변환해준다.
+
+    // 생자바스크립트
+    //   fetch('https://codingapple1.github.io/shop/data2.json')
+    //   .then((res) => {
+    //     return res.json(); //Promise 반환
+    // })
+    // .then((json) => {
+    //     console.log(json); // 서버에서 주는 json데이터가 출력 됨
+    // });
+  }
 
   return (
     <div>
@@ -62,9 +83,10 @@ function App() {
             <div className="row">
               {shoes.map((shoe, i) => {
                 return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
-                // return <Card shoes={shoe} />
+                //또는 return <Card shoes={shoe} />                
               })}
             </div>
+            <button className="btn btn-primary" onClick={loadJson}>더보기</button>
           </div>
         </Route>
 
@@ -77,20 +99,16 @@ function App() {
         </Route>
       </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
-
-      <Container>
-        <Row>
-          <Col>1 of 2</Col>
-          <Col>2 of 2</Col>
-        </Row>
-        <Row>
-          <Col>1 of 3</Col>
-          <Col>2 of 3</Col>
-          <Col>3 of 3</Col>
-        </Row>
-      </Container>
+      {loading===true ? <Loading /> : null}
+   
     </div>
   );
+}
+
+function Loading(){
+  return(
+    <h2> Loading.....</h2>
+  )
 }
 
 function Card(props) {
