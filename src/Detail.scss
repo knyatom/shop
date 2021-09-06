@@ -1,7 +1,7 @@
 @import './reset.scss';
 
 .red {
-    background-color: pink;
+    background-color: white;
 }
 
 $메인컬러:#ff00ff;
@@ -16,7 +16,7 @@ div.container{
         color:blue;
     }
     p{
-        color:white
+        color:gray;
     }
 }
 @mixin  함수() {
@@ -24,7 +24,7 @@ div.container{
     padding:20px;
     border-radius: 5px;
     margin:auto;
-    color:white;
+    color:gray;
     text-align: center;
 }
 .my-alert{
@@ -47,7 +47,7 @@ div.container{
     
     @extend .my-alert;
      background:#333 ;
-     color:white !important;
+     color:#ccc !important;
 }
 
 

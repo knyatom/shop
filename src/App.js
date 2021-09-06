@@ -12,14 +12,14 @@ import axios from 'axios';
 function App() {
   let [shoes, shoes변경] = useState(Data);
   let [loading,setLoading]=useState(false);
+  let [재고,재고변경]=useState([10,11,12]);
 
  const loadJson=()=>{
     // axios.post('서버URL',{id:'codingapple',pw:1234});
     axios.get('https://codingapple1.github.io/shop/data2.json')
     .then((result)=>{
       // 로딩중안보이게하기                
-        setLoading(false);                
-      
+        setLoading(false);   
       shoes변경([...shoes,...result.data]);
     })
     .catch(()=>{
@@ -91,11 +91,11 @@ function App() {
         </Route>
 
         <Route path="/detail/:id" >
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
         </Route>
 
-        <Route  path="/detail/0">
-        <Detail shoes={shoes} />
+        <Route  path="/:id">
+            <div>아무거나 적었을때 이거 보여주셈</div>
         </Route>
       </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
@@ -114,7 +114,7 @@ function Loading(){
 function Card(props) {
   return (
     <div className="col-md-4">
-      <img src={"shoes" + props.i + ".jpg"} width="100%" />
+      <img src={"img/shoes" + props.i + ".jpg"} width="100%" />
       <h4>{props.shoes.title}</h4>
       <p>
         {props.shoes.content} & {props.shoes.price}
