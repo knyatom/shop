@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/knyatom/shop/static/css/main.95798f29.chunk.css",
+    "main.js": "/knyatom/shop/static/js/main.1ac68e34.chunk.js",
+    "main.js.map": "/knyatom/shop/static/js/main.1ac68e34.chunk.js.map",
+    "runtime-main.js": "/knyatom/shop/static/js/runtime-main.8ec00511.js",
+    "runtime-main.js.map": "/knyatom/shop/static/js/runtime-main.8ec00511.js.map",
+    "static/js/2.b556e755.chunk.js": "/knyatom/shop/static/js/2.b556e755.chunk.js",
+    "static/js/2.b556e755.chunk.js.map": "/knyatom/shop/static/js/2.b556e755.chunk.js.map",
+    "static/js/3.49a05ab4.chunk.js": "/knyatom/shop/static/js/3.49a05ab4.chunk.js",
+    "static/js/3.49a05ab4.chunk.js.map": "/knyatom/shop/static/js/3.49a05ab4.chunk.js.map",
+    "index.html": "/knyatom/shop/index.html",
+    "static/css/main.95798f29.chunk.css.map": "/knyatom/shop/static/css/main.95798f29.chunk.css.map",
+    "static/js/2.b556e755.chunk.js.LICENSE.txt": "/knyatom/shop/static/js/2.b556e755.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/knyatom/shop/static/media/bg1.01aac307.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8ec00511.js",
+    "static/js/2.b556e755.chunk.js",
+    "static/css/main.95798f29.chunk.css",
+    "static/js/main.1ac68e34.chunk.js"
+  ]
+}
