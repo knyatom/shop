@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect,useContext  } from "react";
 import { useHistory, useParams } from "react-router-dom";
-
 import styled from "styled-components";
+import {재고context} from './App.js';
 
 let 박스 = styled.div`
   padding: 20px;
@@ -16,6 +15,7 @@ let 제목 = styled.h4`
 function Detail(props) {
   let [alert, alert변경] = useState(true);
   let [inputData, inputData변경]=useState('');
+  let 재고=useContext(재고context);
 
   // 업데이트될때 항상 실행된다.
   useEffect(() => {
@@ -63,11 +63,12 @@ function Detail(props) {
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
 
-           <Info 재고={props.재고} ></Info>
-
+          <Info 재고={props.재고} ></Info>
+          
           <button className="btn btn-danger" onClick={()=>{
             props.재고변경([9,10,12])
           }}>주문하기</button>
+
           <button
             className="btn btn-info"
             onClick={() => {
@@ -83,8 +84,8 @@ function Detail(props) {
               history.push("/");
             }}
           >
-            홈으로가기
-          </button>
+            홈으로가기 
+          </button>{재고}
         </div>
       </div>
     </div>

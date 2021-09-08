@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import {  Navbar,  Container,  Nav,  NavDropdown,  Button,  Row,  Col,
+import React, { useState, useContext } from "react";
+import {
+  Navbar, Container, Nav, NavDropdown, Button, Row, Col,
 } from "react-bootstrap";
 import "./App.css";
 //import {name, name2} from './data.js';
@@ -9,24 +10,27 @@ import { Link, Route, Switch } from "react-router-dom";
 import './Detail.scss';
 import axios from 'axios';
 
+export let 재고context = React.createContext();
+// 콘텍스트 범위지정
+
 function App() {
   let [shoes, shoes변경] = useState(Data);
-  let [loading,setLoading]=useState(false);
-  let [재고,재고변경]=useState([10,11,12]);
+  let [loading, setLoading] = useState(false);
+  let [재고, 재고변경] = useState([10, 11, 12]);
 
- const loadJson=()=>{
+  const loadJson = () => {
     // axios.post('서버URL',{id:'codingapple',pw:1234});
     axios.get('https://codingapple1.github.io/shop/data2.json')
-    .then((result)=>{
-      // 로딩중안보이게하기                
-        setLoading(false);   
-      shoes변경([...shoes,...result.data]);
-    })
-    .catch(()=>{
-      // 로딩중 보이게 하기
-      setLoading(true);
-      console.log('실패..')
-    });
+      .then((result) => {
+        // 로딩중안보이게하기                
+        setLoading(false);
+        shoes변경([...shoes, ...result.data]);
+      })
+      .catch(() => {
+        // 로딩중 보이게 하기
+        setLoading(true);
+        console.log('실패..')
+      });
     // axios ->json을 object로 변환해준다.
 
     // 생자바스크립트
@@ -48,7 +52,7 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {/* <Nav.Link><Link to="/">Home</Link></Nav.Link> */}
-              <Nav.Link as={Link} to="/">Home </Nav.Link> 
+              <Nav.Link as={Link} to="/">Home </Nav.Link>
               <Nav.Link as={Link} to="/detail/0">Detail </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -80,47 +84,65 @@ function App() {
             </p>
           </section>
           <div className="container">
-            <div className="row">
-              {shoes.map((shoe, i) => {
-                return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
-                //또는 return <Card shoes={shoe} />                
-              })}
-            </div>
+
+            {/* 범위로 싸매기 */}
+            <재고context.Provider value={재고}>
+
+              <div className="row">
+                {shoes.map((shoe, i) => {
+                  return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
+                  //또는 return <Card shoes={shoe} />                
+                })}
+              </div>
+
+            </재고context.Provider>
+
             <button className="btn btn-primary" onClick={loadJson}>더보기</button>
           </div>
         </Route>
 
-        <Route path="/detail/:id" >
-          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
-        </Route>
+        <재고context.Provider value={재고}>
+          <Route path="/detail/:id" >
+            <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
+          </Route>
+        </재고context.Provider>
 
-        <Route  path="/:id">
-            <div>아무거나 적었을때 이거 보여주셈</div>
+        <Route path="/:id">
+          <div>아무거나 적었을때 이거 보여주셈</div>
         </Route>
       </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
-      {loading===true ? <Loading /> : null}
-   
+      {loading === true ? <Loading /> : null}
+
     </div>
   );
 }
 
-function Loading(){
-  return(
+function Loading() {
+  return (
     <h2> Loading.....</h2>
   )
 }
 
 function Card(props) {
+
+  let 재고 = useContext(재고context);
+
   return (
     <div className="col-md-4">
-      <img src={"img/shoes" + props.i + ".jpg"} width="100%" />
+      <img src={`img/shoes${props.i}.jpg`} width="100%" />
+      {/* <img src={"shoes" + props.i + ".jpg"} width="100%" /> */}
       <h4>{props.shoes.title}</h4>
-      <p>
-        {props.shoes.content} & {props.shoes.price}
-      </p>
+      <p>  {props.shoes.content} & {props.shoes.price}   </p>
+      {재고[props.i]}
+      <Test></Test>
     </div>
   );
+}
+
+function Test() {
+  let 재고 = useContext(재고context);
+  return <p>{재고}</p>
 }
 
 export default App;
