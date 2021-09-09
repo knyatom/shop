@@ -6,6 +6,14 @@
 
 $메인컬러:#ff00ff;
 
+.wow-enter{
+    opacity: 0;
+}
+.wow-enter-active{
+    opacity: 1;
+    transition: 500ms;
+}
+
 .pink {
     color: $메인컬러;
 }
