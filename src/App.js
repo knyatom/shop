@@ -9,6 +9,7 @@ import Detail from "./Detail.js";
 import { Link, Route, Switch } from "react-router-dom";
 import './Detail.scss';
 import axios from 'axios';
+import Cart from "./Cart.js";
 
 export let 재고context = React.createContext();
 // 콘텍스트 범위지정
@@ -71,6 +72,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
       <Switch>
         <Route exact path="/">
           <section className="background">
@@ -87,29 +89,32 @@ function App() {
 
             {/* 범위로 싸매기 */}
             <재고context.Provider value={재고}>
-
               <div className="row">
                 {shoes.map((shoe, i) => {
                   return <Card shoes={shoes[i]} i={i + 1} key={shoe.id} />;
                   //또는 return <Card shoes={shoe} />                
                 })}
               </div>
-
             </재고context.Provider>
 
             <button className="btn btn-primary" onClick={loadJson}>더보기</button>
           </div>
         </Route>
 
-        <재고context.Provider value={재고}>
-          <Route path="/detail/:id" >
+        <Route path="/detail/:id" >
+          <재고context.Provider value={재고}>
             <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
-          </Route>
-        </재고context.Provider>
+          </재고context.Provider>
+        </Route>
+
+        <Route path="/cart">
+          <Cart></Cart>
+        </Route>
 
         <Route path="/:id">
           <div>아무거나 적었을때 이거 보여주셈</div>
         </Route>
+
       </Switch>
       {/* <Route path="/어쩌구" component={Modal}></Route> */}
       {loading === true ? <Loading /> : null}
