@@ -1,8 +1,14 @@
 import React from 'react'
 import { Table } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect ,useSelector, useDispatch} from 'react-redux';
 
 function Cart(props) {
+
+    let state= useSelector((state) => state)
+    console.log(state.reducer);
+
+    const dispatch = useDispatch()
+
     return (
         <div>
             <div>
@@ -17,15 +23,15 @@ function Cart(props) {
                     </thead>
                     <tbody>
                         {
-                            props.state.map((a, i) => {
+                            state.reducer.map((a, i) => {
                                 return (
                                     <tr key={i}>
                                         <td>{a.id}</td>
                                         <td>{a.name}</td>
                                         <td>{a.quan}</td>
                                         <td>
-                                            <button onClick={() => { props.dispatch({ type: "수량증가" }) }}>+</button>
-                                            <button onClick={() => { props.dispatch({ type: "수량감소" }) }}>-</button>
+                                            <button onClick={() => { dispatch({ type: "수량증가" }) }}>+</button>
+                                            <button onClick={() => { dispatch({ type: "수량감소" }) }}>-</button>
                                         </td>
                                     </tr>
                                 )
@@ -45,14 +51,13 @@ function Cart(props) {
     )
 }
 
-function state를props화(state) {
-    console.log(state);
-    return {
-        //상품명:state[0].name
-        state: state.reducer,
-        alert열렸니: state.reducer2
-    }
-}
+// function state를props화(state) {
+//     console.log(state);
+//     return {
+//         state: state.reducer,
+//         alert열렸니: state.reducer2
+//     }
+// }
 
-//export default Cart
-export default connect(state를props화)(Cart)
+export default Cart
+//export default connect(state를props화)(Cart)
